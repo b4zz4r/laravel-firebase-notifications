@@ -1,5 +1,5 @@
 {
-    "name": "besanek/laravel-firebase-notifications",
+    "name": "b4zz4r/laravel-firebase-notifications",
     "description": "Thin layer for integrate Firebase Messaging as Laravel Notifications",
     "keywords": ["filesystem", "laravel", "notifications", "firebase", "l5", "l6"],
     "type": "library",
@@ -15,12 +15,6 @@
         "phpunit/phpunit": "^9.0",
         "mockery/mockery": "^1.4.2"
     },
-    "authors": [
-        {
-            "name": "Robert Jelen",
-            "email": "robert@jelen.dev"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Besanek\\LaravelFirebaseNotifications\\": "src/"

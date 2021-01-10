@@ -10,7 +10,7 @@ Thin layer for integrate Firebase Messaging as Laravel Notifications
 ## Installing
 
 ```shell
-$ composer require "besanek/laravel-firebase-notifications"
+$ composer require "b4zz4r/laravel-firebase-notifications"
 ```
 
 This is all, thanks to the Package Autodiscover.
