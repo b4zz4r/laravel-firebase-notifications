@@ -4,16 +4,16 @@
     "keywords": ["filesystem", "laravel", "notifications", "firebase", "l5", "l6"],
     "type": "library",
     "require": {
-        "illuminate/notifications": "^5.5|^6.0",
-        "illuminate/support": "^5.5|^6.0",
-        "php": "~7.1",
+        "illuminate/notifications": "^7.0|^8.0",
+        "illuminate/support": "^7.0|^8.0",
+        "php": "^7.4",
         "kreait/firebase-php": "~4.18",
         "ext-json": "*"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.8|^4.0",
-        "phpunit/phpunit": "^7.0|^8.0",
-        "mockery/mockery": "~1.0"
+        "orchestra/testbench": "^3.8|^4.0|^5.0|^6.0",
+        "phpunit/phpunit": "^9.0",
+        "mockery/mockery": "^1.4.2"
     },
     "authors": [
         {

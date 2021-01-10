@@ -6,15 +6,15 @@ namespace Besanek\LaravelFirebaseNotifications\Tests\Fixtures;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 
-class TestNotifiable {
-
+class TestNotifiable
+{
     use Notifiable;
 
     /** @var mixed */
     private $targets;
 
     /**
-     * @param $targets
+     * @param mixed $targets
      */
     public function __construct($targets)
     {

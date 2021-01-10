@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Besanek\LaravelFirebaseNotifications;
 
 use Besanek\LaravelFirebaseNotifications\Exceptions\ChannelException;
+use Exception;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Arr;
@@ -12,14 +13,8 @@ use Kreait\Firebase\Messaging\MulticastSendReport;
 
 class FirebaseChannel
 {
-    /**
-     * @var Messaging
-     */
-    private $messaging;
+    private Messaging $messaging;
 
-    /**
-     * @param Messaging $messaging
-     */
     public function __construct(Messaging $messaging)
     {
         $this->messaging = $messaging;
@@ -27,8 +22,9 @@ class FirebaseChannel
 
     /**
      * @param Notifiable $notifiable
-     * @param Notification $notification
-     * @return MulticastSendReport
+     * @return \Kreait\Firebase\Messaging\MulticastSendReport
+     * @throws \Kreait\Firebase\Exception\FirebaseException
+     * @throws \Kreait\Firebase\Exception\MessagingException
      */
     public function send($notifiable, Notification $notification): MulticastSendReport
     {
@@ -51,9 +47,6 @@ class FirebaseChannel
         return $this->messaging->sendMulticast($message, $targets);
     }
 
-    /**
-     * @param array $targets
-     */
     private function validateTargets(array $targets): void
     {
         foreach ($targets as $target) {
