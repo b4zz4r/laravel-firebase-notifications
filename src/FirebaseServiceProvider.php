@@ -17,7 +17,6 @@ class FirebaseServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/firebase.php', 'firebase');
 
-        $this->registerServiceAccount();
         $this->registerFirebase();
         $this->registerMessaging();
         $this->registerChannel();
@@ -25,16 +24,17 @@ class FirebaseServiceProvider extends ServiceProvider
         $this->extendNotifications();
     }
 
-    private function registerServiceAccount(): void
+    private function registerFirebase(): void
     {
-        $this->app->singleton(ServiceAccount::class, function (Application $application) {
+        $this->app->singleton(Firebase\Factory::class, function (Application $application) {
             /** @var Repository $config */
             $config = $application->make(Repository::class);
 
+            $factory = new Firebase\Factory();
             $credentials = $config->get('firebase.credentials');
 
             if (is_file($credentials)) {
-                return ServiceAccount::fromJsonFile($credentials);
+                return $factory->withServiceAccount($credentials);
             }
 
             json_decode($credentials);
@@ -48,25 +48,18 @@ class FirebaseServiceProvider extends ServiceProvider
                 );
             }
 
-            return ServiceAccount::fromJson($credentials);
-        });
-    }
 
-    private function registerFirebase(): void
-    {
-        $this->app->singleton(Firebase::class, function (Application $application) {
-            /** @var ServiceAccount $serviceAccount */
-            $serviceAccount = $application->make(ServiceAccount::class);
-            return (new Firebase\Factory)->withServiceAccount($serviceAccount)->create();
+            return $factory->withServiceAccount($credentials);
         });
     }
 
     private function registerMessaging(): void
     {
         $this->app->singleton(Firebase\Messaging::class, function (Application $application) {
-            /** @var Firebase $firebase */
-            $firebase = $application->make(Firebase::class);
-            return $firebase->getMessaging();
+            /** @var \Kreait\Firebase\Factory $factory */
+            $factory = $application->make(Firebase\Factory::class);
+
+            return $factory->createMessaging();
         });
     }
 

@@ -5,6 +5,7 @@ namespace Besanek\LaravelFirebaseNotifications\Tests;
 
 use Besanek\LaravelFirebaseNotifications\Exceptions\ConfigurationException;
 use Illuminate\Contracts\Config\Repository;
+use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 
 class ConfigurationTest extends TestCase
@@ -41,7 +42,7 @@ class ConfigurationTest extends TestCase
         @unlink($path);
         $configRepository->set('firebase.credentials', $path);
 
-        $this->app->make(ServiceAccount::class);
+        $this->app->make(Factory::class);
     }
 
     public function testInvalidJSON(): void
@@ -53,6 +54,6 @@ class ConfigurationTest extends TestCase
 
         $configRepository->set('firebase.credentials', '{"this": "is", "not": "valid", "JSON": "",}');
 
-        $this->app->make(ServiceAccount::class);
+        $this->app->make(Factory::class);
     }
 }

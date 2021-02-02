@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         backupGlobals="false"
          backupStaticAttributes="false"
          bootstrap="vendor/autoload.php"
          colors="true"
@@ -7,17 +8,18 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
-         stopOnFailure="false">
+         stopOnFailure="false"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </coverage>
     <testsuites>
         <testsuite name="Application Test Suite">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="FIREBASE_CREDENTIALS" value="{&quot;type&quot;: &quot;service_account&quot;,&quot;project_id&quot;: &quot;notifikace-1385&quot;,&quot;private_key_id&quot;: &quot;d770b1309cd192dc08390a50019a1d5ba8fb3e73&quot;,&quot;private_key&quot;: &quot;-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDAUXDu2FiS2Glw\nFEjSaHLwi/TOwhRruL/tZXHM9xg2e53W5DmQOZlh6eqBnbBD8VxwoIiv1VcfKkuH\nVLpAD5DNH1qkfhyuSX9oFx1ZKULfFBKHEq5P5wgeXlDQhaQtlV1/y4X/FW2I0xPD\nAL3gAMaU9bZdOq3DdLaPgRHK3cMbKhIQKL1QrcsCzTW2EuXxV/OqvujsimGmTD4f\nZ/QdjxSCTf7TEZFmpVnDRmE8u7ZxHn6xuDcPWUe6ldloM/h+JsMkMj3RXab9Seh7\nuWqwHmXvsRiOpBflhR7y45P3+GaJ0uEgz3Nnorgam3QIyg2r7m1RzkOIaFYPbfrd\nk5dW1L6pAgMBAAECggEAEqbzbol3ZwqWiKMXAFKBWfjLo0/pyMbQKoHtEcV3SOAg\nCgBJivDjLOlnGpoaHITTWS22BA5gwZTfDWmMxNDIU59HscN0xvyO3vVlncj62Nrq\nrxoDOPGodRWNqKOwLXxFPLNBtDXg++UI5MqfdRMY2h1N9L3PrjDAJ1aLzLf0XR/B\n/S6/r1OD2GP3BklvgGdaRXV2JWbPIppdeHV9N45Qsfhz9rn29WVZVKAy3+dZMCk1\n7ZzdMAo4BPEm0JfIelpZKxRgyNBGNyL2KQdsq/n8aYv1LfYS1Y/jnIvsSuE2wA1b\nPtra/4oEjtQ9SsO0mGOpByDWkyp7iKSyUB+obHyVRwKBgQD2nPOQCNMm1dMx9PzZ\nqL8vTTvziGgJpS1Lc1BDvQqMXxTKsgvM3aTwyO5I5/tdDqFwRq5iMQ8IU85Any36\nWq0RGLmK1ExJdC7GS0HcAydQ4sgbAquMme8xLzIuzx7ad0HBRrLyYBk0x6rp8FZe\nfBwqZ04bNUURzQcfnNBUve8YgwKBgQDHo22wcVLMIhU7K54Ki3XlAMYUq71dMKjo\n7ry9MIxBL9gN4T3syHbFi9bllglHPy1oQPjQ+N6ALAfMspsf54ZqQ0Ik8PuTMXxH\nxhagGwvPAmj6WtSzPJnLgy0mMIPvhCyOm9j3o6wsU94N/fbC0UUr9ekpchLyZn47\nTEhlki1sYwKBgCfN+XocEojIJoh/tHglRoaJ/s02DSTRZlgxSplEX/l8N0zoJANz\nGvZKWDuoReglPmVy4x6yMGz1qerARpmMHTcPOJNx5MZOXGZhK0YptCTYFdhWO/47\nsmHL7lujzqUQbqqVkLiSTj84oxuTUT165sjpV7AIjxdqcmXl17J13aulAoGBAMai\nFgZjisUu+D7qVBIb1o6m6W8xvXUWcElrGIGI51QIvYh53vpULtC5JXVDhjHMa2p6\nktaheAjBRnVmFDB3VWcvSoWk/DrlFsn3DxX4MxSiSj8m1tELb95swyRnSy6qLQcr\ni4JB6JImVB9J3BbUz2VBBN/G75EdZ2WqrbHZ8rYPAoGAPz3yl+dvXAKiCauZVPXv\nbU6OUqWyYvLX35nqPBIRliS596UMioHMKzlvXZfNO2xIWH0K45lB5BmVIwZmJizO\nQMUJ8s0gBV7ud3BoKG94Dx1tnWeKUl32pNwvb9sEGrdCKPZNdHyhG2LVX8QpglB5\nDjrz6yWduas72zW14ZlBd8k=\n-----END PRIVATE KEY-----\n&quot;,&quot;client_email&quot;: &quot;firebase-adminsdk-igzqu@notifikace-1385.iam.gserviceaccount.com&quot;,&quot;client_id&quot;: &quot;105543135479401493409&quot;,&quot;auth_uri&quot;: &quot;https://accounts.google.com/o/oauth2/auth&quot;,&quot;token_uri&quot;: &quot;https://oauth2.googleapis.com/token&quot;,&quot;auth_provider_x509_cert_url&quot;: &quot;https://www.googleapis.com/oauth2/v1/certs&quot;,&quot;client_x509_cert_url&quot;: &quot;https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-igzqu%40notifikace-1385.iam.gserviceaccount.com&quot;}"/>

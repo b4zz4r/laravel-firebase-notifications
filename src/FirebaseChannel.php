@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Besanek\LaravelFirebaseNotifications;
 
 use Besanek\LaravelFirebaseNotifications\Exceptions\ChannelException;
-use Exception;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Arr;
@@ -49,6 +48,10 @@ class FirebaseChannel
 
     private function validateTargets(array $targets): void
     {
+        if (blank($targets)) {
+            throw new ChannelException('Targets cannot be empty.');
+        }
+
         foreach ($targets as $target) {
             if (!is_string($target)) {
                 throw new ChannelException(sprintf('Notification target must be string, %s given', gettype($target)));

@@ -45,9 +45,11 @@ class FirebaseTest extends TestCase
 
         $notification = new TestNotification();
 
+        $this->expectException(ChannelException::class);
         $notifiable = new TestNotifiable(null);
         $notifiable->notify($notification);
 
+        $this->expectException(ChannelException::class);
         $notifiable = new TestNotifiable([]);
         $notifiable->notify($notification);
     }
