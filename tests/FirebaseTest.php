@@ -26,7 +26,9 @@ class FirebaseTest extends TestCase
         parent::setUp();
         $this->app->extend('events', function (Dispatcher $dispatcher) {
             $dispatcher->listen(NotificationSent::class, function (NotificationSent $notification) {
-                call_user_func($this->assert, $notification);
+                if (is_callable($this->assert)) {
+                    call_user_func($this->assert, $notification);
+                }
             });
             return $dispatcher;
         });
@@ -45,11 +47,9 @@ class FirebaseTest extends TestCase
 
         $notification = new TestNotification();
 
-        $this->expectException(ChannelException::class);
         $notifiable = new TestNotifiable(null);
         $notifiable->notify($notification);
 
-        $this->expectException(ChannelException::class);
         $notifiable = new TestNotifiable([]);
         $notifiable->notify($notification);
     }
@@ -105,7 +105,12 @@ class FirebaseTest extends TestCase
 
     public function testInvalidTarget(): void
     {
-        $this->expectException(ChannelException::class);
+        $this->assert = function (NotificationSent $notification) {
+            /** @var MulticastSendReport $report */
+            $report = $notification->response;
+
+            $this->assertSame(0, $report->successes()->count());
+        };
 
         $notification = new TestNotification();
 

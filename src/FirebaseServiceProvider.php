@@ -48,7 +48,6 @@ class FirebaseServiceProvider extends ServiceProvider
                 );
             }
 
-
             return $factory->withServiceAccount($credentials);
         });
     }

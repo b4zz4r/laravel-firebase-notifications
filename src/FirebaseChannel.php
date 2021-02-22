@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Arr;
 use Kreait\Firebase\Messaging;
 use Kreait\Firebase\Messaging\MulticastSendReport;
+use Kreait\Firebase\Messaging\SendReport;
 
 class FirebaseChannel
 {
@@ -41,7 +42,12 @@ class FirebaseChannel
 
         $targets = $notifiable->routeNotificationFor('firebase', $notification);
         $targets = !$targets ? [] : Arr::wrap($targets);
-        $this->validateTargets($targets);
+
+        try {
+            $this->validateTargets($targets);
+        } catch (ChannelException $e) {
+            return MulticastSendReport::withItems([]);
+        }
 
         return $this->messaging->sendMulticast($message, $targets);
     }
